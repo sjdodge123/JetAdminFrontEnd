@@ -31,7 +31,7 @@ package
 			tableHeight = height;
 		}
 			
-		public function buildPrinter(name:String = "Default", currentBlack:int = 0, color:Boolean = false, currentMag:int = 0, currentCyan:int = 0, currentYellow:int = 0, date:String = "", plotter:Boolean = false, photoBlack:int = 0, matteBlack:int = 0, gray:int = 0, model:String = "", flexID:String = ""):void
+		public function buildPrinter(name:String = "Default", currentBlack:int = 0, color:Boolean = false, currentMag:int = 0, currentCyan:int = 0, currentYellow:int = 0, date:String = "", plotter:Boolean = false, photoBlack:int = 0, matteBlack:int = 0, gray:int = 0, model:String = "", flexID:String = "",ipAddress:String = ""):void
 		{
 			if (blocks % 7 == 0) 
 			{
@@ -40,7 +40,7 @@ package
 				currentY += 50;
 			}
 			blocks += 1;
-			var newPrinter:Printer = new Printer(name, currentX, currentY, currentBlack, color, currentMag, currentCyan, currentYellow,date,plotter,photoBlack,matteBlack,gray,model,flexID);
+			var newPrinter:Printer = new Printer(name, currentX, currentY, currentBlack, color, currentMag, currentCyan, currentYellow,date,plotter,photoBlack,matteBlack,gray,model,flexID,ipAddress);
 			currentX += 97;
 			addChild(newPrinter);
 			

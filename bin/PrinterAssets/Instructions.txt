@@ -1,0 +1,3 @@
+Add images to this folder with the EXACT name listed on the database reporting
+
+Resize to 45 x48

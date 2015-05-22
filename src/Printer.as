@@ -35,8 +35,9 @@ package
 		protected var minute:String;
 		private var model:String;
 		private var flexID:String;
+		private var ipAddress:String;
 		
-		public function Printer(name:String,x:int, y:int,currentBlack:int,color:Boolean=false,currentMag:int=0,currentCyan:int=0,currentYellow:int=0,date:String = "", plotter:Boolean=false,photoBlack:int=0,matteBlack:int=0,gray:int=0,model:String="",flexID:String="") 
+		public function Printer(name:String,x:int, y:int,currentBlack:int,color:Boolean=false,currentMag:int=0,currentCyan:int=0,currentYellow:int=0,date:String = "", plotter:Boolean=false,photoBlack:int=0,matteBlack:int=0,gray:int=0,model:String="",flexID:String="",ipAddress:String="null") 
 		{
 			this.x = x;
 			this.y = y;
@@ -45,6 +46,7 @@ package
 			this.useHandCursor = true;
 			this.model = model;
 			this.flexID = flexID;
+			this.ipAddress = ipAddress;
 			image = new ImageSelector(x,y);
 			image.findImage(model);
 			inkDisplay = new InkDisplay((x + blockWidth / 2)-27.5, y-15, color);
@@ -126,9 +128,7 @@ package
 			warningField.selectable = false;
 			addChild(warningField);
 		}
-		
-		
-		
+
 		private function displayDate():void 
 		{
 			var format:TextFormat = new TextFormat();
@@ -203,7 +203,7 @@ package
 		
 		private function mouseClicked(e:MouseEvent):void 
 		{
-			advPrint = new AdvPrintPage(e.stageX - 50, e.stageY - 50, this.printerName,this.model,flexID);
+			advPrint = new AdvPrintPage(e.stageX - 50, e.stageY - 50, this.printerName,this.model,this.flexID,this.ipAddress);
 			advPrint.year = year;
 			advPrint.day = day;
 			advPrint.month = month;

@@ -3,6 +3,8 @@ package
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
+	import flash.text.TextFormat;
+	import AdvPrintPage.TextPanel;
 	/**
 	 * ...
 	 * @author Jake
@@ -10,12 +12,10 @@ package
 	public class AdvPrintPage extends Sprite
 	{
 		private var objectBorder:Sprite;
-		private var printName:String;
-		private var nameField:TextField;
-		private var flexIDField:TextField;
-		private var modelField:TextField;
 		private var exitBox:Sprite;
 		private var exitField:TextField;
+		private var textPanel:TextPanel;
+		
 		public var boxWidth:int = 400;
 		public var boxHeight:int = 300;
 		public var year:String;
@@ -23,24 +23,18 @@ package
 		public var day:String;
 		public var hour:String;
 		public var minute:String;
-		public var model:String;
-		public var flexID:String = "FLEX ID: ";
 		
-		public function AdvPrintPage(x:int,y:int,name:String="null",model:String="null",flexID:String="null") 
+	
+		public function AdvPrintPage(x:int,y:int,name:String="null",model:String="null",flexID:String="null",ipAddress:String="null") 
 		{
 			this.x = x;
 			this.y = y;
-			this.printName = name;
-			this.model = model;
-			this.flexID += flexID;
+			textPanel = new TextPanel(30,5,name, model, flexID, ipAddress);
 			exitBox = new Sprite();
 			buildBorder();
-			displayName();
+			addChild(textPanel);
 			displayExit();
-			displayModel();
-			displayFlexID();
 		}
-		
 		public function buildBorder():void 
 		{
 			objectBorder = new Sprite();
@@ -51,38 +45,6 @@ package
 			objectBorder.graphics.endFill();
 			addChild(objectBorder);
 		}
-		
-		private function displayModel():void 
-		{
-			modelField = new TextField();
-			modelField.x = 110;
-			modelField.y = 10;
-			modelField.textColor =0x000000;
-			modelField.text = this.model;
-			modelField.width = modelField.text.length * 10;
-			addChild(modelField);
-		}
-		
-		private function displayName():void 
-		{	
-			nameField = new TextField();
-			nameField.x = 10;
-			nameField.y = 10;
-			nameField.width = printName.length * 10;
-			nameField.text = printName;
-			addChild(nameField);
-		}
-		
-		private function displayFlexID():void 
-		{	
-			flexIDField = new TextField();
-			flexIDField.x = 10;
-			flexIDField.y = 30;
-			flexIDField.width = flexID.length * 10;
-			flexIDField.text = flexID;
-			addChild(flexIDField);
-		}
-		
 		private function displayExit():void 
 		{
 			if (contains(exitBox)) 
