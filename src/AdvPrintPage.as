@@ -5,6 +5,7 @@ package
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import AdvPrintPage.TextPanel;
+	import AdvPrintPage.PrintPanel;
 	/**
 	 * ...
 	 * @author Jake
@@ -15,6 +16,7 @@ package
 		private var exitBox:Sprite;
 		private var exitField:TextField;
 		private var textPanel:TextPanel;
+		private var printPanel:PrintPanel;
 		
 		public var boxWidth:int = 400;
 		public var boxHeight:int = 300;
@@ -29,11 +31,13 @@ package
 		{
 			this.x = x;
 			this.y = y;
-			textPanel = new TextPanel(30,5,name, model, flexID, ipAddress);
+			textPanel = new TextPanel(30, 5, name, model, flexID, ipAddress);
+			printPanel = new PrintPanel(5, 100);		
 			exitBox = new Sprite();
 			buildBorder();
-			addChild(textPanel);
 			displayExit();
+			addChild(textPanel);
+			addChild(printPanel);
 		}
 		public function buildBorder():void 
 		{
@@ -59,8 +63,10 @@ package
 			exitBox.addEventListener(MouseEvent.MOUSE_OVER, mouseOver);
 			addChild(exitBox);
 			exitField = new TextField();
-			exitField.x = boxWidth-30;
+			exitField.x = boxWidth - 30;
 			exitField.y = 10;
+			exitField.width = 12;
+			exitField.height = 20;
 			exitField.selectable = false;
 			exitField.text = "X";
 			exitBox.addChild(exitField);
@@ -86,6 +92,8 @@ package
 			exitField = new TextField();
 			exitField.x = boxWidth-30;
 			exitField.y = 10;
+			exitField.width = 12;
+			exitField.height = 20;
 			exitField.selectable = false;
 			exitField.text = "X";
 			exitBox.addChild(exitField);
@@ -96,10 +104,7 @@ package
 			exitBox.removeEventListener(MouseEvent.CLICK, exitClicked);
 			exitBox.removeEventListener(MouseEvent.MOUSE_OUT, mouseOut);
 			displayExit();
-		}
-		
-		
-		
+		}		
 	}
 
 }
