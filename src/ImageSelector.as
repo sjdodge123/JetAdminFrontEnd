@@ -11,6 +11,7 @@ package
 	public class ImageSelector extends Sprite 
 	{
 		private var image:ImageLoader;
+		
 		public function ImageSelector(x:int,y:int) 
 		{
 			this.x = x + 5.5;

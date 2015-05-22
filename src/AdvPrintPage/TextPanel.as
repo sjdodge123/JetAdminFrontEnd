@@ -41,7 +41,7 @@ package AdvPrintPage
 			modelField = new TextField();
 			modelField.x = 0;
 			modelField.y = 40;
-			modelField.textColor =0x000000;
+			modelField.textColor = 0x000000;
 			modelField.text = this.model;
 			modelField.width = modelField.text.length * 10;
 			modelField.setTextFormat(displayText);
