@@ -39,6 +39,7 @@ package
 		private var model:String;
 		private var flexID:String;
 		private var ipAddress:String;
+		private var redTimeout:Timer;
 		
 		public function Printer(name:String,x:int, y:int,currentBlack:int,color:Boolean=false,currentMag:int=0,currentCyan:int=0,currentYellow:int=0,date:String = "", plotter:Boolean=false,photoBlack:int=0,matteBlack:int=0,gray:int=0,model:String="",flexID:String="",ipAddress:String="null") 
 		{
@@ -52,7 +53,8 @@ package
 			this.ipAddress = ipAddress;
 			image = new ImageSelector(x,y);
 			image.findImage(model);
-			inkDisplay = new InkDisplay((x + blockWidth / 2)-27.5, y-15, color);
+			inkDisplay = new InkDisplay((x + blockWidth / 2) - 27.5, y - 15, color);
+			redTimeout = new Timer(300);
 			if (name != null) 
 			{
 				printerName = name;
@@ -97,6 +99,11 @@ package
 			icon = new ImageSelector(x,y-32.5);
 			icon.findImage("infoIcon");
 			icon.addEventListener(MouseEvent.ROLL_OVER, mouseOver);
+			redIcon = new ImageSelector(x, y - 32.5);
+			redIcon.findImage("infoIcon");
+			redIcon.alpha = .5
+			redIcon.addEventListener(MouseEvent.ROLL_OUT, mouseOut);
+			redIcon.addEventListener(MouseEvent.CLICK, mouseClicked);
 			addChild(icon);
 		}
 		
@@ -108,6 +115,7 @@ package
 			objectBorder.graphics.beginFill(0xFFFFFF);
 			objectBorder.graphics.drawRect(x, y, blockWidth, borderHeight);
 			objectBorder.graphics.endFill();
+			objectBorder.addEventListener(MouseEvent.MOUSE_OUT, mouseOut);
 			addChildAt(objectBorder,0);
 		}
 		
@@ -188,10 +196,6 @@ package
 			if (contains(objectBorder)) 
 			{
 				icon.removeEventListener(MouseEvent.ROLL_OVER, mouseOver);
-				redIcon = new ImageSelector(x,y-32.5);
-				redIcon.findImage("infoIconRed");
-				redIcon.addEventListener(MouseEvent.ROLL_OUT, mouseOut);
-				redIcon.addEventListener(MouseEvent.CLICK, mouseClicked);
 				addChild(redIcon);
 				removeChild(icon);
 			}
@@ -203,10 +207,6 @@ package
 				redIcon.removeEventListener(MouseEvent.ROLL_OUT, mouseOver);
 				removeChild(redIcon);
 				buildButton();
-			}
-			else if (contains(icon))
-			{
-				trace("triggered");
 			}
 		}
 		
@@ -226,6 +226,7 @@ package
 			dispatchEvent(new AddEvent(AddEvent.PAGE_ADD, false, advPrint));
 			
 		}
+		
 		private function relay(e:AddEvent):void 
 		{
 			dispatchEvent(new AddEvent(AddEvent.PAGE_REMOVE, false, advPrint));
