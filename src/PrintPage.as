@@ -21,7 +21,7 @@ package
 		
 		public function PrintPage(stage:Stage) 
 		{
-			currentAdvPage = new AdvPrintPage( -500, -500, "null","null");
+			currentAdvPage = new AdvPrintPage( -500, -500, new Printer("", 0, 0, 0), "null", "null");
 			this.pageStage = stage;
 			dataBase = new DbRequest("PrinterAssets/output.csv");
 			dataBase.addEventListener(Event.COMPLETE, onLoadData);

@@ -25,21 +25,21 @@ package
 		public var blockWidth:Number = 194;
 		public var blockHeight :Number = 0;
 		public var borderHeight:int = 100;
-		private var color:Boolean;
-		private var image:ImageSelector;
-		private var icon:ImageSelector;
-		private var redIcon:ImageSelector;
-		private var date:String;
-		private var advPrint:AdvPrintPage;
+		public var color:Boolean;
+		public var image:ImageSelector;
+		public var icon:ImageSelector;
+		public var redIcon:ImageSelector;
+		public var date:String;
+		public var advPrint:AdvPrintPage;
 		protected var year:String;
 		protected var month:String;
 		protected var day:String;
 		protected var hour:String;
 		protected var minute:String;
-		private var model:String;
-		private var flexID:String;
-		private var ipAddress:String;
-		private var redTimeout:Timer;
+		public var model:String;
+		public var flexID:String;
+		public var ipAddress:String;
+		public var redTimeout:Timer;
 		
 		public function Printer(name:String,x:int, y:int,currentBlack:int,color:Boolean=false,currentMag:int=0,currentCyan:int=0,currentYellow:int=0,date:String = "", plotter:Boolean=false,photoBlack:int=0,matteBlack:int=0,gray:int=0,model:String="",flexID:String="",ipAddress:String="null") 
 		{
@@ -212,7 +212,7 @@ package
 		
 		private function mouseClicked(e:MouseEvent):void 
 		{
-			advPrint = new AdvPrintPage(e.stageX - 50, e.stageY - 50, this.printerName,this.model,this.flexID,this.ipAddress);
+			advPrint = new AdvPrintPage(e.stageX - 50, e.stageY - 50,this, this.printerName,this.model,this.flexID,this.ipAddress);
 			advPrint.year = year;
 			advPrint.day = day;
 			advPrint.month = month;

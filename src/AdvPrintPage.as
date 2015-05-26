@@ -25,14 +25,16 @@ package
 		public var day:String;
 		public var hour:String;
 		public var minute:String;
+		private var printer:Printer;
 		
 	
-		public function AdvPrintPage(x:int,y:int,name:String="null",model:String="null",flexID:String="null",ipAddress:String="null") 
+		public function AdvPrintPage(x:int,y:int,printer:Printer,name:String="null",model:String="null",flexID:String="null",ipAddress:String="null") 
 		{
 			this.x = x;
 			this.y = y;
+			this.printer = printer;
 			textPanel = new TextPanel(30, 5, name, model, flexID, ipAddress);
-			printPanel = new PrintPanel(5, 100);		
+			printPanel = new PrintPanel(5, 100,printer);		
 			exitBox = new Sprite();
 			buildBorder();
 			displayExit();
