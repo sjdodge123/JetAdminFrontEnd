@@ -16,7 +16,7 @@ package
 	public class Printer extends Sprite
 	{
 		private const threshold:int = 17;
-		private var inkDisplay:InkDisplay;
+		public var inkDisplay:InkDisplay;
 		private var objectBorder:Sprite;
 		private var printerName:String = "NO_DATA";
 		private var nameField:TextField;
@@ -40,6 +40,12 @@ package
 		public var flexID:String;
 		public var ipAddress:String;
 		public var redTimeout:Timer;
+		public var plotter:Boolean;
+		public var currentBlack:int;
+		public var currentMag:int;
+		public var currentCyan:int;
+		public var currentYellow:int;
+		public var currentGrey:int;
 		
 		public function Printer(name:String,x:int, y:int,currentBlack:int,color:Boolean=false,currentMag:int=0,currentCyan:int=0,currentYellow:int=0,date:String = "", plotter:Boolean=false,photoBlack:int=0,matteBlack:int=0,gray:int=0,model:String="",flexID:String="",ipAddress:String="null") 
 		{
@@ -51,6 +57,12 @@ package
 			this.model = model;
 			this.flexID = flexID;
 			this.ipAddress = ipAddress;
+			this.plotter = plotter;
+			this.currentBlack = currentBlack;
+			this.currentCyan = currentCyan;
+			this.currentMag = currentMag;
+			this.currentYellow = currentYellow;
+			this.currentGrey = currentGrey;
 			image = new ImageSelector(x,y);
 			image.findImage(model);
 			inkDisplay = new InkDisplay((x + blockWidth / 2) - 27.5, y - 15, color);
