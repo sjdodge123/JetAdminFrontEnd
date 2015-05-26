@@ -39,7 +39,6 @@ package
 		private var model:String;
 		private var flexID:String;
 		private var ipAddress:String;
-		private var redIconTimeout:Timer;
 		
 		public function Printer(name:String,x:int, y:int,currentBlack:int,color:Boolean=false,currentMag:int=0,currentCyan:int=0,currentYellow:int=0,date:String = "", plotter:Boolean=false,photoBlack:int=0,matteBlack:int=0,gray:int=0,model:String="",flexID:String="",ipAddress:String="null") 
 		{
@@ -51,8 +50,6 @@ package
 			this.model = model;
 			this.flexID = flexID;
 			this.ipAddress = ipAddress;
-			redIconTimeout = new Timer(500, 0);
-			redIconTimeout.addEventListener(TimerEvent.TIMER, killred);
 			image = new ImageSelector(x,y);
 			image.findImage(model);
 			inkDisplay = new InkDisplay((x + blockWidth / 2)-27.5, y-15, color);
@@ -193,9 +190,8 @@ package
 				icon.removeEventListener(MouseEvent.ROLL_OVER, mouseOver);
 				redIcon = new ImageSelector(x,y-32.5);
 				redIcon.findImage("infoIconRed");
-				redIcon.addEventListener(MouseEvent.MOUSE_OUT, mouseOut);
+				redIcon.addEventListener(MouseEvent.ROLL_OUT, mouseOut);
 				redIcon.addEventListener(MouseEvent.CLICK, mouseClicked);
-				redIconTimeout.start();
 				addChild(redIcon);
 				removeChild(icon);
 			}
@@ -204,20 +200,14 @@ package
 		{
 			if (contains(redIcon)) 
 			{
-				redIcon.removeEventListener(MouseEvent.MOUSE_OUT, mouseOver);
+				redIcon.removeEventListener(MouseEvent.ROLL_OUT, mouseOver);
 				removeChild(redIcon);
 				buildButton();
 			}
-		}
-		
-		private function killred(e:Event):void 
-		{
-			if ((contains(redIcon))) 
+			else if (contains(icon))
 			{
-				redIconTimeout.reset();
-				mouseOut(null)
+				trace("triggered");
 			}
-			
 		}
 		
 		private function mouseClicked(e:MouseEvent):void 
