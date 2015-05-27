@@ -49,8 +49,15 @@ package
 		public var currentGrey:int;
 		public var matteBlack:int;
 		public var photoBlack:int;
+		public var magCart:String;
+		public var cyanCart:String;
+		public var yellowCart:String;
+		public var blackCart:String;
+		public var matteCart:String;
+		public var grayCart:String;
+		public var cartArray:Array;
 		
-		public function Printer(name:String,x:int, y:int,currentBlack:int,color:Boolean=false,currentMag:int=0,currentCyan:int=0,currentYellow:int=0,date:String = "", plotter:Boolean=false,photoBlack:int=0,matteBlack:int=0,gray:int=0,model:String="",flexID:String="",ipAddress:String="null") 
+		public function Printer(name:String,x:int, y:int,currentBlack:int,color:Boolean=false,currentMag:int=0,currentCyan:int=0,currentYellow:int=0,date:String = "", plotter:Boolean=false,photoBlack:int=0,matteBlack:int=0,gray:int=0,model:String="",flexID:String="",ipAddress:String="null",blackCart:String="null",cyanCart:String="null",magCart:String="null",yellowCart:String="null",photoCart:String='null',grayCart:String='null',matteCart:String='null') 
 		{
 			this.x = x;
 			this.y = y;
@@ -68,9 +75,13 @@ package
 			this.currentGrey = gray;
 			this.matteBlack = matteBlack;
 			this.photoBlack = photoBlack;
+			this.magCart = magCart;
+			this.cyanCart = cyanCart;
+			this.yellowCart = yellowCart;
+			cartArray = new Array(blackCart, cyanCart, magCart, yellowCart,matteCart,grayCart,photoCart);
 			image = new ImageSelector(x,y);
 			image.findImage(model);
-			inkDisplay = new InkDisplay((x + blockWidth / 2) - 27.5, y - 15, color);
+			inkDisplay = new InkDisplay((x + blockWidth / 2) - 27.5, y - 15,color,plotter);
 			redTimeout = new Timer(300);
 			if (name != null) 
 			{
@@ -105,7 +116,7 @@ package
 			}
 			this.x = newX;
 			this.y = newY;
-			inkDisplay = new InkDisplay(x + blockWidth / 2, y, color);
+			inkDisplay = new InkDisplay(x + blockWidth / 2, y, color,plotter);
 			addChild(inkDisplay);
 			displayName();
 			buildBorder(blockWidth);

@@ -12,8 +12,28 @@ package
 		private var plotterInk:PlotterInk;
 		private var paddingX:int = 10;
 		private var paddingY:int = 50;
-		public function InkDisplay(x:int,y:int,color:Boolean,plotter:Boolean=false,large:Boolean=false) 
+		private var blackCart:String="null";
+		private var cyanCart:String="null";
+		private var magCart:String = "null";
+		private var matteCart:String = "null";
+		private var grayCart:String = "null";
+		private var yellowCart:String = "null";
+		private var photoCart:String="null";
+		
+		public function InkDisplay(x:int,y:int,color:Boolean,plotter:Boolean=false,large:Boolean=false,cartArray:Array=null) 
 		{
+			colorInk = new ColorInk(x - paddingX, y + paddingY);
+			plotterInk = new PlotterInk(100, 25);
+			if (cartArray)
+			{
+				blackCart = cartArray[0];
+				cyanCart = cartArray[1];
+				magCart = cartArray[2]; 
+				yellowCart = cartArray[3];
+				matteCart = cartArray[4];
+				grayCart = cartArray[5];
+				photoCart = cartArray[6];
+			}
 			if (!large)
 			{
 				blackInk = new InkBar(x - paddingX, y + paddingY, 0x000000);
@@ -22,9 +42,16 @@ package
 			}
 			else 
 			{
-				blackInk = new InkBar(100, 25, 0x000000, large);
-				colorInk = new ColorInk(100, 25, large);
-				plotterInk = new PlotterInk(100, 25,large);
+				blackInk = new InkBar(100, 25, 0x000000, large, blackCart);
+				if(color) 
+				{
+					colorInk = new ColorInk(100, 25, large, cyanCart, magCart, yellowCart);
+				}
+				if(plotter) 
+				{
+					blackInk = new InkBar(100, 25, 0x000000, large, photoCart);
+					plotterInk = new PlotterInk(100, 25,large,matteCart,grayCart);
+				}
 			}
 			addChild(blackInk);
 			if (color) 

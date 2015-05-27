@@ -17,14 +17,20 @@ package
 		private var inkPercent:TextField;
 		private var large:Boolean;
 		private var thickness:Number = 6;
-		private var fontSize:int = 10;
-		private var inkTextX:Number = 102.5; 
-		public function InkBar(x:int,y:int,color:uint,large:Boolean=false) 
+		private var inkTextX:Number = 102.5;
+		private var cartDisplay:TextField;
+		private var displayText:TextFormat;
+		private var cartType:String="null";
+		
+		public function InkBar(x:int,y:int,color:uint,large:Boolean=false,cartType:String="null") 
 		{
 			this.x = x;
 			this.y = y;
 			this.color = color;
 			this.large = large;
+			this.cartType = cartType;
+			displayText= new TextFormat();
+			displayText.size = 10;
 			if (!large)
 			{
 				bar = new Sprite();
@@ -45,7 +51,7 @@ package
 				container.graphics.drawRect(0, 0, 150, 20);
 				addChild(container);
 				thickness = 18.75;
-				fontSize = 18;
+				displayText.size = 18;
 				bar.graphics.beginFill(color);
 				bar.graphics.drawRect(.5, .75, fill, 5.5);
 				bar.graphics.endFill();
@@ -93,14 +99,12 @@ package
 			if (large)
 			{
 				inkTextX = 152.5;
-				fontSize = 18;
+				displayCartType();
 			}
-			var format:TextFormat = new TextFormat();
-			format.size = fontSize;
 			inkPercent = new TextField();
 			inkPercent.x = inkTextX;
 			inkPercent.y = -3;
-			inkPercent.defaultTextFormat = format;
+			inkPercent.defaultTextFormat = displayText;
 			if (value >= 0)
 			{ 
 				inkPercent.text = value.toString() + "%" ; 
@@ -112,7 +116,19 @@ package
 			}
 			inkPercent.selectable = false;
 			addChild(inkPercent);
-			
+		}
+		
+		private function displayCartType():void 
+		{
+			displayText.bold = true;
+			cartDisplay = new TextField();
+			cartDisplay.x = inkTextX+50;
+			cartDisplay.y = -3;
+			cartDisplay.width = 100;
+			cartDisplay.text = cartType;
+			cartDisplay.setTextFormat(displayText);
+			displayText.bold = false;
+			addChild(cartDisplay);
 		}
 		
 		private function checkForError(value:int):Boolean

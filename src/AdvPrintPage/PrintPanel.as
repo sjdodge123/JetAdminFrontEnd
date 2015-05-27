@@ -1,6 +1,7 @@
 package AdvPrintPage 
 {
 	import flash.display.Sprite;
+
 	/**
 	 * ...
 	 * @author Jake
@@ -11,6 +12,7 @@ package AdvPrintPage
 		private var printer:Printer;
 		private var printImage:ImageSelector;
 		private var inkDisplay:InkDisplay;
+
 		
 		public function PrintPanel(x:int,y:int,printer:Printer) 
 		{
@@ -25,7 +27,7 @@ package AdvPrintPage
 		{
 			background = new Sprite();
 			background.graphics.beginFill(0xfafafa)
-			background.graphics.lineStyle(1, 0x696969);
+			background.graphics.lineStyle(1, 0x696969,.5);
 			background.graphics.drawRect(0, 0, 390, 175);
 			background.graphics.endFill();
 			addChild(background);
@@ -38,14 +40,12 @@ package AdvPrintPage
 		}
 		private function displayInkbars():void 
 		{
-			inkDisplay = new InkDisplay(150, 15, printer.color, printer.plotter, true);
+			inkDisplay = new InkDisplay(150, 15, printer.color, printer.plotter,true,printer.cartArray);
 			inkDisplay.updateBlack(printer.currentBlack);
 			inkDisplay.updateColor(printer.currentMag, printer.currentCyan, printer.currentYellow);
 			inkDisplay.updatePlotterColors(printer.matteBlack, printer.currentGrey);
 			addChild(inkDisplay);
 		}
-		
-		
 	}
 
 }

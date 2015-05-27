@@ -11,7 +11,7 @@ package
 		private var cyanInk:InkBar;
 		private var yellowInk:InkBar;
 		
-		public function ColorInk(x:int, y:int, large:Boolean = false) 
+		public function ColorInk(x:int, y:int, large:Boolean = false,cyanCart:String = "null",magCart:String="null",yellowCart:String="null") 
 		{
 			this.x = x;
 			this.y = y;
@@ -23,9 +23,9 @@ package
 			}
 			else 
 			{
-				magentaInk = new InkBar(0, 20, 0xcc00cc,true);
-				cyanInk = new InkBar(0, 40, 0x00cccc,true);
-				yellowInk = new InkBar(0, 60, 0xe5e500,true);
+				magentaInk = new InkBar(0, 20, 0xcc00cc,true,magCart);
+				cyanInk = new InkBar(0, 40, 0x00cccc,true,cyanCart);
+				yellowInk = new InkBar(0, 60, 0xe5e500,true,yellowCart);
 			}
 			
 			addChild(magentaInk);

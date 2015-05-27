@@ -10,7 +10,7 @@ package
 		private var matteInk:InkBar;
 		private var grayInk:InkBar;
 		
-		public function PlotterInk(x:int,y:int,large:Boolean=false) 
+		public function PlotterInk(x:int,y:int,large:Boolean=false,matteCart:String="null",grayCart:String="null") 
 		{
 			this.x = x;
 			this.y = y;
@@ -21,8 +21,8 @@ package
 			}
 			else 
 			{
-				matteInk = new InkBar(0, 80, 0x2b2b2b,true);
-				grayInk = new InkBar(0, 100, 0x898989,true);
+				matteInk = new InkBar(0, 80, 0x2b2b2b,true,matteCart);
+				grayInk = new InkBar(0, 100, 0x898989,true,grayCart);
 			}
 			addChild(matteInk);
 			addChild(grayInk);
