@@ -190,21 +190,21 @@ package
 		}
 		private function checkThreshold(color:Boolean, currentBlack:int, currentCyan:int, currentMag:int, currentYellow:int):void
 		{
-			if (currentBlack < threshold && currentBlack > 0) 
+			if (currentBlack <= threshold && currentBlack > 0) 
 			{
 				displayWarning();
 			}
 			if (color) 
 			{
-				if (currentMag < threshold && currentMag > 0) 
+				if (currentMag <= threshold && currentMag > 0) 
 				{
 					displayWarning();
 				}
-				if (currentCyan < threshold && currentCyan > 0) 
+				if (currentCyan <= threshold && currentCyan > 0) 
 				{
 					displayWarning();
 				}
-				if (currentYellow < threshold && currentYellow > 0) 
+				if (currentYellow <= threshold && currentYellow > 0) 
 				{
 					displayWarning();
 				}
