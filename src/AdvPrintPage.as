@@ -33,8 +33,8 @@ package
 			this.x = x;
 			this.y = y;
 			this.printer = printer;
-			textPanel = new TextPanel(30, 5, name, model, flexID, ipAddress);
-			printPanel = new PrintPanel(5, 100,printer);		
+			textPanel = new TextPanel(30, 5, name, model, flexID, ipAddress,printer.warningDisplayed);
+			printPanel = new PrintPanel(5, 110,printer);		
 			exitBox = new Sprite();
 			buildBorder();
 			displayExit();
@@ -99,7 +99,6 @@ package
 			exitField.selectable = false;
 			exitField.text = "X";
 			exitBox.addChild(exitField);
-			
 		}
 		private function mouseOut(e:MouseEvent):void 
 		{

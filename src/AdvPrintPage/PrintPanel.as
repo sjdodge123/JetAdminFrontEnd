@@ -41,7 +41,7 @@ package AdvPrintPage
 			inkDisplay = new InkDisplay(150, 15, printer.color, printer.plotter, true);
 			inkDisplay.updateBlack(printer.currentBlack);
 			inkDisplay.updateColor(printer.currentMag, printer.currentCyan, printer.currentYellow);
-			inkDisplay.updatePlotterColors(printer.currentBlack, printer.currentGrey);
+			inkDisplay.updatePlotterColors(printer.matteBlack, printer.currentGrey);
 			addChild(inkDisplay);
 		}
 		

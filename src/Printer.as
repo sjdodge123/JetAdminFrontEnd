@@ -15,7 +15,8 @@ package
 	 */
 	public class Printer extends Sprite
 	{
-		private const threshold:int = 17;
+		private const threshold:int = 10;
+		public var warningDisplayed:Boolean = false;
 		public var inkDisplay:InkDisplay;
 		private var objectBorder:Sprite;
 		private var printerName:String = "NO_DATA";
@@ -46,6 +47,8 @@ package
 		public var currentCyan:int;
 		public var currentYellow:int;
 		public var currentGrey:int;
+		public var matteBlack:int;
+		public var photoBlack:int;
 		
 		public function Printer(name:String,x:int, y:int,currentBlack:int,color:Boolean=false,currentMag:int=0,currentCyan:int=0,currentYellow:int=0,date:String = "", plotter:Boolean=false,photoBlack:int=0,matteBlack:int=0,gray:int=0,model:String="",flexID:String="",ipAddress:String="null") 
 		{
@@ -62,7 +65,9 @@ package
 			this.currentCyan = currentCyan;
 			this.currentMag = currentMag;
 			this.currentYellow = currentYellow;
-			this.currentGrey = currentGrey;
+			this.currentGrey = gray;
+			this.matteBlack = matteBlack;
+			this.photoBlack = photoBlack;
 			image = new ImageSelector(x,y);
 			image.findImage(model);
 			inkDisplay = new InkDisplay((x + blockWidth / 2) - 27.5, y - 15, color);
@@ -82,6 +87,7 @@ package
 			}
 			else 
 			{
+				this.currentBlack = photoBlack;
 				inkDisplay = new InkDisplay((x + blockWidth / 2)-27.5, y-15, color,plotter);
 				inkDisplay.updateBlack(photoBlack);
 				inkDisplay.updateColor(currentMag, currentCyan, currentYellow);
@@ -143,6 +149,7 @@ package
 		
 		private function displayWarning():void 
 		{
+			warningDisplayed = true;
 			warningField = new TextField();
 			warningField.x = x + 140;
 			warningField.y = y + 10;
@@ -183,21 +190,21 @@ package
 		}
 		private function checkThreshold(color:Boolean, currentBlack:int, currentCyan:int, currentMag:int, currentYellow:int):void
 		{
-			if (currentBlack < threshold) 
+			if (currentBlack < threshold && currentBlack > 0) 
 			{
 				displayWarning();
 			}
 			if (color) 
 			{
-				if (currentMag < threshold) 
+				if (currentMag < threshold && currentMag > 0) 
 				{
 					displayWarning();
 				}
-				if (currentCyan < threshold) 
+				if (currentCyan < threshold && currentCyan > 0) 
 				{
 					displayWarning();
 				}
-				if (currentYellow < threshold) 
+				if (currentYellow < threshold && currentYellow > 0) 
 				{
 					displayWarning();
 				}

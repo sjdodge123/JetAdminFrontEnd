@@ -13,15 +13,17 @@ package AdvPrintPage
 		private var flexIDField:TextField;
 		private var modelField:TextField;
 		private var ipField:TextField;
-		
+		private var warnField:TextField;
+		private var warnColor:uint;
 		private var displayText:TextFormat;
 		
 		private var printName:String = "Hostname: ";
 		private var model:String = "Model: ";
 		private var flexID:String = "Flex ID: ";
 		private var ipAddress:String = "IP : ";
+		private var warning:String = "Status: ";
 		
-		public function TextPanel(x:int, y:int, printName:String, model:String, flexID:String, ipAddress:String) 
+		public function TextPanel(x:int, y:int, printName:String, model:String, flexID:String, ipAddress:String,warnStatus:Boolean) 
 		{
 			this.x = x;
 			this.y = y;
@@ -29,11 +31,22 @@ package AdvPrintPage
 			this.model += model;
 			this.flexID += flexID;
 			this.ipAddress += ipAddress;
+			if (warnStatus) 
+			{
+				this.warning += "Warning! Ink Level Low. TKT Created"
+				warnColor = 0xFF0000;
+			}
+			else 
+			{
+				this.warning += "Safe"
+				warnColor = 0x0000FF;
+			}
 			displayText = new TextFormat(null, 14, null, true);
 			displayName();
 			displayModel();
 			displayFlexID();
 			displayIP();
+			displayWarning();
 		}
 		
 		private function displayModel():void 
@@ -77,6 +90,18 @@ package AdvPrintPage
 			ipField.text = ipAddress;
 			ipField.setTextFormat(displayText);
 			addChild(ipField);
+		}
+		private function displayWarning():void 
+		{
+			warnField = new TextField();
+			warnField.x = 0;
+			warnField.y = 80;
+			warnField.width = warning.length * 10;
+			warnField.height = 20;
+			warnField.text = warning;
+			warnField.textColor = warnColor;
+			warnField.setTextFormat(displayText);
+			addChild(warnField);
 		}
 		
 	}

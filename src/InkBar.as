@@ -56,17 +56,36 @@ package
 		public function adjustInk(newValue:Number):void
 		{
 			var displayValue:Number = newValue;
-			if (large) 
+			if (checkForError(newValue)) 
 			{
-				newValue *= 1.5;
+				if (large) 
+				{
+					newValue *= 1.5;
+				}
+				removeChild(bar);
+				bar.graphics.clear();
+				bar.graphics.beginFill(color);
+				bar.graphics.drawRect(.5, .85, newValue, thickness);
+				bar.graphics.endFill();
+				addChild(bar);
+				inkDisplay(displayValue);
 			}
-			removeChild(bar);
-			bar.graphics.clear();
-			bar.graphics.beginFill(color);
-			bar.graphics.drawRect(.5, .85, newValue, thickness);
-			bar.graphics.endFill();
-			addChild(bar);
-			inkDisplay(displayValue);
+			else 
+			{
+				if (large) 
+				{
+					newValue *= 1.5;
+				}
+				removeChild(bar);
+				bar.graphics.clear();
+				bar.graphics.beginFill(0xFF0000);
+				bar.graphics.drawRect(.5, .85, 0, thickness);
+				bar.graphics.endFill();
+				addChild(bar);
+				inkDisplay(-1);
+			}
+			
+			
 		}
 		
 		private function inkDisplay(value:int):void 
@@ -76,18 +95,34 @@ package
 				inkTextX = 152.5;
 				fontSize = 18;
 			}
-				var format:TextFormat = new TextFormat();
-				format.size = fontSize;
-				inkPercent = new TextField();
-				inkPercent.x = inkTextX;
-				inkPercent.y = -3;
-				inkPercent.defaultTextFormat = format;
-				inkPercent.text = value.toString() + "%" ;
-				inkPercent.selectable = false;
-				addChild(inkPercent);
+			var format:TextFormat = new TextFormat();
+			format.size = fontSize;
+			inkPercent = new TextField();
+			inkPercent.x = inkTextX;
+			inkPercent.y = -3;
+			inkPercent.defaultTextFormat = format;
+			if (value >= 0)
+			{ 
+				inkPercent.text = value.toString() + "%" ; 
+			}
+			else
+			{
+				inkPercent.textColor = 0xFF0000
+				inkPercent.text = "Error"; 
+			}
+			inkPercent.selectable = false;
+			addChild(inkPercent);
 			
 		}
 		
+		private function checkForError(value:int):Boolean
+		{	
+			if (value > 0) 
+			{
+				return true;
+			}
+			return false;
+		}
 	}
 
 }

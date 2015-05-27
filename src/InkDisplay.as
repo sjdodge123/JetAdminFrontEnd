@@ -51,6 +51,8 @@ package
 			plotterInk.adjustInk(matteBlack, gray);
 		}
 		
+		
+		
 	}
 
 }

@@ -33,7 +33,6 @@ package
 			matteInk.adjustInk(matteBlack);
 			grayInk.adjustInk(gray);
 		}
-		
 	}
 
 }
