@@ -40,7 +40,7 @@ package AdvPrintPage
 		}
 		private function displayInkbars():void 
 		{
-			inkDisplay = new InkDisplay(150, 15, printer.color, printer.plotter,true,printer.cartArray);
+			inkDisplay = new InkDisplay(150, 15, printer.color, printer.plotter,true,printer.printObject);
 			inkDisplay.updateBlack(printer.currentBlack);
 			inkDisplay.updateColor(printer.currentMag, printer.currentCyan, printer.currentYellow);
 			inkDisplay.updatePlotterColors(printer.matteBlack, printer.currentGrey);

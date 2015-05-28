@@ -37,6 +37,7 @@ package
 		protected var day:String;
 		protected var hour:String;
 		protected var minute:String;
+		public var printObject:PrinterObject;
 		public var model:String;
 		public var flexID:String;
 		public var ipAddress:String;
@@ -55,29 +56,33 @@ package
 		public var blackCart:String;
 		public var matteCart:String;
 		public var grayCart:String;
+		public var photoCart:String;
 		public var cartArray:Array;
 		
-		public function Printer(name:String,x:int, y:int,currentBlack:int,color:Boolean=false,currentMag:int=0,currentCyan:int=0,currentYellow:int=0,date:String = "", plotter:Boolean=false,photoBlack:int=0,matteBlack:int=0,gray:int=0,model:String="",flexID:String="",ipAddress:String="null",blackCart:String="null",cyanCart:String="null",magCart:String="null",yellowCart:String="null",photoCart:String='null',grayCart:String='null',matteCart:String='null') 
+		public function Printer(x:int,y:int,printer:PrinterObject) 
 		{
+			this.useHandCursor = true;
 			this.x = x;
 			this.y = y;
-			this.color = color;
-			this.date = date;
-			this.useHandCursor = true;
-			this.model = model;
-			this.flexID = flexID;
-			this.ipAddress = ipAddress;
-			this.plotter = plotter;
-			this.currentBlack = currentBlack;
-			this.currentCyan = currentCyan;
-			this.currentMag = currentMag;
-			this.currentYellow = currentYellow;
-			this.currentGrey = gray;
-			this.matteBlack = matteBlack;
-			this.photoBlack = photoBlack;
-			this.magCart = magCart;
-			this.cyanCart = cyanCart;
-			this.yellowCart = yellowCart;
+			this.printObject = printer;
+			this.name = printer.name;
+			this.color = printer.color;
+			this.date = printer.timeStamp;
+			this.model = printer.model;
+			this.flexID = printer.flexID;
+			this.ipAddress = printer.address;
+			this.plotter = printer.plotter;
+			this.currentBlack = int(printer.blackLevel);
+			this.currentCyan = int(printer.cyanLevel);
+			this.currentMag = int(printer.magentaLevel);
+			this.currentYellow = int(printer.yellowLevel);
+			this.currentGrey = int(printer.grayLevel);
+			this.matteBlack = int(printer.matteBlackLevel);
+			this.photoBlack = int(printer.photoBlackLevel);
+			this.magCart = printer.magentaCart;
+			this.cyanCart = printer.cyanCart;
+			this.yellowCart = printer.yellowCart;
+			this.photoCart = printer.photoBlackCart;
 			cartArray = new Array(blackCart, cyanCart, magCart, yellowCart,matteCart,grayCart,photoCart);
 			image = new ImageSelector(x,y);
 			image.findImage(model);
@@ -102,7 +107,7 @@ package
 				inkDisplay = new InkDisplay((x + blockWidth / 2)-27.5, y-15, color,plotter);
 				inkDisplay.updateBlack(photoBlack);
 				inkDisplay.updateColor(currentMag, currentCyan, currentYellow);
-				inkDisplay.updatePlotterColors(matteBlack,gray);
+				inkDisplay.updatePlotterColors(matteBlack,currentGrey);
 			}
 			addChild(inkDisplay);
 			addChild(image);
@@ -242,7 +247,7 @@ package
 		
 		private function mouseClicked(e:MouseEvent):void 
 		{
-			advPrint = new AdvPrintPage(e.stageX - 50, e.stageY - 50,this, this.printerName,this.model,this.flexID,this.ipAddress);
+			advPrint = new AdvPrintPage(e.stageX - 50, e.stageY - 50,this);
 			advPrint.year = year;
 			advPrint.day = day;
 			advPrint.month = month;

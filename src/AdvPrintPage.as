@@ -28,12 +28,12 @@ package
 		private var printer:Printer;
 		
 	
-		public function AdvPrintPage(x:int,y:int,printer:Printer,name:String="null",model:String="null",flexID:String="null",ipAddress:String="null") 
+		public function AdvPrintPage(x:int,y:int,printer:Printer) 
 		{
 			this.x = x;
 			this.y = y;
 			this.printer = printer;
-			textPanel = new TextPanel(30, 5, name, model, flexID, ipAddress,printer.warningDisplayed);
+			textPanel = new TextPanel(30, 5, printer.name, printer.model, printer.flexID, printer.ipAddress,printer.warningDisplayed);
 			printPanel = new PrintPanel(5, 110,printer);		
 			exitBox = new Sprite();
 			buildBorder();

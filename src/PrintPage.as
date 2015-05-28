@@ -21,7 +21,7 @@ package
 		
 		public function PrintPage(stage:Stage) 
 		{
-			currentAdvPage = new AdvPrintPage( -500, -500, new Printer("", 0, 0, 0), "null", "null");
+			currentAdvPage = new AdvPrintPage(0, 0, new Printer(0, 0, new PrinterObject()));
 			this.pageStage = stage;
 			dataBase = new DbRequest("PrinterAssets/output.csv");
 			dataBase.addEventListener(Event.COMPLETE, onLoadData);
@@ -42,9 +42,8 @@ package
 		{
 			for (var i:int = 0; i < printers.length; i++) 
 			{
-				table.buildPrinter(printers[i].name, int(printers[i].blackLevel), printers[i].color, int(printers[i].magentaLevel), int(printers[i].cyanLevel), int(printers[i].yellowLevel), printers[i].timeStamp, printers[i].plotter,int(printers[i].photoBlackLevel),int(printers[i].matteBlackLevel),int(printers[i].grayLevel),printers[i].model,printers[i].flexID,printers[i].address,printers[i].blackCart,printers[i].cyanCart,printers[i].magentaCart,printers[i].yellowCart,printers[i].photoBlackCart,printers[i].grayCart,printers[i].matteBlackCart);
+				table.buildPrinter(printers[i]);
 			}
-			
 		}
 		
 		private function addToPage(e:AddEvent):void 

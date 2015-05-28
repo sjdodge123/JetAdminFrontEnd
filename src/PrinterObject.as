@@ -6,30 +6,30 @@ package
 	 */
 	public class PrinterObject 
 	{
-		public var name:String;
-		public var address:String;
-		public var inkType:String;
-		public var blackLevel:String;
-		public var blackCart:String;
-		public var cyanLevel:String;
-		public var cyanCart:String;
-		public var magentaLevel:String;
-		public var magentaCart:String;
-		public var yellowLevel:String;
-		public var grayLevel:String;
-		public var grayCart:String;
-		public var photoBlackLevel:String;
-		public var photoBlackCart:String;
-		public var matteBlackLevel:String;
-		public var matteBlackCart:String;
-		public var yellowCart:String;
-		public var timeStamp:String;
+		public var name:String= "null";
+		public var address:String= "null";
+		public var inkType:String= "null";
+		public var blackLevel:String= "null";
+		public var blackCart:String= "null";
+		public var cyanLevel:String= "null";
+		public var cyanCart:String= "null";
+		public var magentaLevel:String= "null";
+		public var magentaCart:String= "null";
+		public var yellowLevel:String= "null";
+		public var grayLevel:String= "null";
+		public var grayCart:String= "null";
+		public var photoBlackLevel:String= "null";
+		public var photoBlackCart:String= "null";
+		public var matteBlackLevel:String= "null";
+		public var matteBlackCart:String= "null";
+		public var yellowCart:String= "null";
+		public var timeStamp:String= "null";
 		public var color:Boolean = false;
 		public var plotter:Boolean = false;
-		public var model:String = "";
-		public var flexID:String = "";
+		public var model:String = "null";
+		public var flexID:String = "null";
 		
-		public function PrinterObject(name:String, address:String, inkType:String, inkLevel:String, timeStamp:String, cartType:String,model:String="",flexID:String="") 
+		public function PrinterObject(name:String="null", address:String="null", inkType:String="null", inkLevel:String="null", timeStamp:String="null", cartType:String="null",model:String="",flexID:String="") 
 		{
 			this.name = name;
 			this.address = address;
